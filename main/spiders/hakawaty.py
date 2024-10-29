@@ -13,6 +13,12 @@ class HakawatySpider(scrapy.Spider):
     STORY_CONTENT_XPATH = ".//span/p"
     children_categories = ["قصص للصغار", "ألف ليلة وليلة"]
 
+    custom_settings = {
+        "ITEM_PIPELINES": {
+            "main.pipelines.HakawatyPipeline": 1,
+        }
+    }
+
     def parse(self, response: scrapy.http.response.Response):
         categories = response.xpath(self.CATEGORY_DIV_XPATH)
         for category in categories:
